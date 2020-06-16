@@ -1,12 +1,5 @@
 <script>
-	import Routing from './Routing.svelte';
-	export let name;
+	import Routing from './router/index.svelte'
 </script>
 
-<style>
-	h1 {
-		color: purple;
-	}
-</style>
 <Routing></Routing>
-<h1>Hello {name}!</h1>
