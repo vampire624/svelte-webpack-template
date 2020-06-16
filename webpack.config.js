@@ -10,18 +10,18 @@ const prod = mode === 'production';
 
 module.exports = {
 	entry: {
-		bundle: ['./src/main.js']
+		main: ['./src/main.js']
 	},
 	resolve: {
 		alias: {
 			svelte: path.resolve('node_modules', 'svelte'),
-			'@': path.resolve(__dirname, 'src')
+			'@': path.resolve('src')
 		},
 		extensions: ['.mjs', '.js', '.svelte'],
 		mainFields: ['svelte', 'browser', 'module', 'main']
 	},
 	output: {
-		path: __dirname + '/dist',
+		path: `${__dirname}/dist`,
 		filename: 'js/[name].[chunkHash].js',
 		chunkFilename: 'js/[name].[chunkHash].js'
 	},
@@ -30,7 +30,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.(js|mjs|svelte)$/,
-				include: path.resolve(__dirname, 'src/'),
+				include: path.resolve('src'),
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -46,11 +46,7 @@ module.exports = {
 				test: /\.svelte$/,
 				use: {
 					loader: 'svelte-loader',
-					options: {
-						...svelteConfig,
-						emitCss: true,
-						hotReload: true
-					}
+					options: svelteConfig
 				}
 			},
 			{
@@ -134,6 +130,7 @@ module.exports = {
 	],
 	devServer: {
 		historyApiFallback: true,
-		contentBase: path.resolve(__dirname, 'dist'),
+		contentBase: path.resolve('dist'),
+		open: true
 	}
 };

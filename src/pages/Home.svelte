@@ -19,11 +19,8 @@
 </main>
 
 <style lang="less">
-	/* @import 'style/index.less'; */
+	@import 'style/index.less';
 	main {
-		display: flex;
-		justify-content: center;
-		align-items: center;
 		text-align: center;
 		padding: 1em;
 		max-width: 240px;
