@@ -10,7 +10,7 @@ module.exports = {
   }, */
   preprocess: sveltePreprocess({
     less: {
-      paths: [path.resolve(__dirname, 'src')]
+      paths: [path.resolve('src')]
     }
   }),
   emitCss: true,

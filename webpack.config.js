@@ -21,7 +21,7 @@ module.exports = {
 		mainFields: ['svelte', 'browser', 'module', 'main']
 	},
 	output: {
-		path: `${__dirname}/dist`,
+		path: `${__dirname}/dist`, // 绝对路径
 		filename: 'js/[name].[chunkHash].js',
 		chunkFilename: 'js/[name].[chunkHash].js'
 	},
