@@ -29,25 +29,24 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(js|mjs|svelte)$/,
-				include: path.resolve('src'),
-				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: ['@babel/preset-env'],
-						plugins: [
-							['@babel/plugin-syntax-dynamic-import', { useESModules: true }],
-							'@babel/plugin-transform-runtime'
-						]
-					}
-				},
+				test: /\.(js|mjs)$/,
+				exclude: /node_modules\/(?!svelte.*)/,
+				use: 'babel-loader',
 			},
 			{
 				test: /\.svelte$/,
-				use: {
-					loader: 'svelte-loader',
-					options: svelteConfig
-				}
+				exclude: /node_modules\/(?!svelte.*)/,
+				use: [
+					'babel-loader',
+					{
+						loader: 'svelte-loader',
+						options: {
+							...svelteConfig,
+							emitCss: true,
+							hotReload: true
+						}
+					}
+				]
 			},
 			{
 				test: /\.css$/,
@@ -76,7 +75,7 @@ module.exports = {
 			},
 			{
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        loader: 'file-loader'
+        use: 'file-loader'
       }
 		]
 	},
@@ -126,7 +125,7 @@ module.exports = {
 				}
 			]
 		}),
-		new CleanWebpackPlugin({ dry: !prod, verbose: true }) // dry 开发模式下不删除文件
+		new CleanWebpackPlugin({ dry: !prod, /* verbose: true */ }) // dry 开发模式下不删除文件
 	],
 	devServer: {
 		historyApiFallback: true,

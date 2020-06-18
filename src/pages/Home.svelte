@@ -42,7 +42,6 @@
 
 	.test {
 		color: #ff3e00;
-		display: flex;
 		transform: rotate(0);
 		&-c {
 			color: aqua;
