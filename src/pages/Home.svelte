@@ -1,6 +1,16 @@
 <script>
 	// import Button from '@smui/button'
 	// import '@/style/index.less'
+	// const promise = new Promise()
+	/* 测试 babel 对‘全局对象’的转换 */
+	const set = new Set()
+	const map = new Map()
+	const promise = new Promise((resolve) => {
+		resolve()
+	})
+	/* 测试 babel 对全部对象实例方法的转换 */
+	const str = 'string'
+	const trusy = str.includes('s')
 </script>
 
 <main>

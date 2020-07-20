@@ -1,8 +1,8 @@
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWbbpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const path = require('path');
 const svelteConfig = require('./svelte.config');
 
 const mode = process.env.NODE_ENV || 'development';
@@ -30,12 +30,17 @@ module.exports = {
 		rules: [
 			{
 				test: /\.(js|mjs)$/,
-				exclude: /node_modules\/(?!svelte.*)/,
+				/* svelte 相关的包都属于后编译 */
+				include: [
+					path.resolve('src'),
+					path.resolve('node_modules/svelte'),
+					path.resolve('node_modules/svelte-routing'),
+					path.resolve('node_modules/svelte-loadable')
+				],
 				use: 'babel-loader',
 			},
 			{
 				test: /\.svelte$/,
-				exclude: /node_modules\/(?!svelte.*)/,
 				use: [
 					'babel-loader',
 					{
@@ -86,6 +91,7 @@ module.exports = {
 				vendor: {
 					name: 'vendor',
 					test: /[\\/]node_modules[\\/]/,
+					/* 异步同步都抽离，其他选项 initial 和 async */
 					chunks: 'all',
 					priority: 10
 				},
